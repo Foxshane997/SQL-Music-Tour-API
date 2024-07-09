@@ -16,9 +16,18 @@ app.get('/', (req, res) => {
 })
 
 // Controllers
+
+// Bands Controller
 const bandsController = require('./controllers/bands_controller')
 app.use('/bands', bandsController)
 
+// Event Controller
+const eventsController = require('./controllers/events_controller')
+app.use('/events', eventsController)
+
+// Stages Controller
+const stagesController = require('./controllers/stages_controller')
+app.use('/stages', stagesController)
 
 // Port Listener
 app.listen(process.env.PORT, () => {

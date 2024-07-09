@@ -4,7 +4,7 @@ const db = require("../models");
 const { Band } = db;
 const { Op } = require("sequelize");
 
-// Index route - GET
+// Band Index route - GET
 bands.get("/", async (req, res) => {
   try {
     // Find all in ascending order - ASC
