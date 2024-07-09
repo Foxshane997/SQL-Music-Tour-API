@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }))
 // Root
 app.get('/', (req, res) => {
     res.status(200).json({
-        message: 'Welcome to the Tour API'
+        message: 'Welcome to the Tour API SF'
     })
 })
 
