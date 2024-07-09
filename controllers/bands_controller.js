@@ -2,19 +2,26 @@ const bands = require("express").Router();
 const { where } = require("sequelize");
 const db = require("../models");
 const { Band } = db;
+const { Op } = require("sequelize");
 
 // Index route - GET
 bands.get("/", async (req, res) => {
   try {
-    const foundBands = await Band.findAll();
+    // Find all in ascending order - ASC
+    const foundBands = await Band.findAll({
+      order: [["available_start_time", "ASC"]],
+      // Functionality for query by name
+      where: {
+        name: { [Op.like]: `%${req.query.name ? req.query.name : ""}%` },
+      },
+    });
     res.status(200).json(foundBands);
   } catch (error) {
     res.status(500).json(error);
   }
 });
 
-// Show Route
-// Showing null due table column being empty - POST
+// Show Route - POST
 bands.get("/:id", async (req, res) => {
   try {
     const foundBand = await Band.findOne({
