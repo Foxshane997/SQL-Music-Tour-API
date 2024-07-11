@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class set_times extends Model {
+  class SetTime extends Model {
     static associate({ Band, Event, Stage }) {
       set_times.belongsTo(Band, {
         foreignKey: "band_id",
@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  set_times.init(
+  SetTime.init(
     {
       set_time_id: {
         type: DataTypes.INTEGER,
@@ -43,10 +43,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "set_times",
+      modelName: "SetTime",
       tableName: "set_times",
       timestamps: false,
     }
   );
-  return set_times;
+  return SetTime;
 };

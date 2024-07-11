@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class events extends Model {
+  class Event extends Model {
     static associate({ Stage, StageEvent }) {
       Event.belongsToMany(Stage, {
         foreignKey: "event_id",
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  events.init(
+  Event.init(
     {
       event_id: {
         type: DataTypes.INTEGER,
@@ -41,10 +41,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "events",
+      modelName: "Event",
       tableName: "events",
       timestamps: false,
     }
   );
-  return events;
+  return Event;
 };
