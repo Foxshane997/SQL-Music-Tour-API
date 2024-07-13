@@ -23,7 +23,8 @@ bands.get("/", async (req, res) => {
   }
 });
 
-// Band Show Route with MeetGreet, Event, & SetTime render - GET
+// Band Show Route with MeetGreet, Event, & SetTime render WIP - GET
+
 bands.get("/:name", async (req, res) => {
   try {
     const foundBand = await Band.findOne({
@@ -56,6 +57,27 @@ bands.get("/:name", async (req, res) => {
               },
             },
           },
+        },
+        {
+          model: Stage,
+          as: "stage",
+          attributes: ["stage_id", "stage_name"],
+          include: [
+            {
+              model: StageEvent,
+              as: "stage_events",
+              attributes: ["stage_event_id", "event_id"],
+              include: {
+                model: Event,
+                as: "event",
+                where: {
+                  name: {
+                    [Op.like]: `%${req.query.event ? req.query.event : ""}%`,
+                  },
+                },
+              },
+            },
+          ],
         },
       ],
     });
